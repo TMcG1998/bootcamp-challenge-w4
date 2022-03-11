@@ -2,6 +2,9 @@
 const start = 60;
 var time = start;
 
+var score = 0;
+var multiplier = 1;
+
 // store the quiz questions to be displayed
 var questions = [
     {
@@ -48,19 +51,21 @@ var questions = [
 
 // store the counter
 var counterE1 = document.getElementById('counter');
+var multiplierE1 = document.getElementById('multiplier');
 
 let countInterval;
 
 // starts the timer when the button is clicked
 function updateTimer() {
-    if(!countInterval) {
+    if(!countInterval) { 
         countInterval = setInterval(timer, 1000);
+        multiplierE1.textContent = multiplier + "x";
     }
 } 
 
 // keeps the timer ticking, and will stop at 0
 function timer() {
-    counterE1.innerHTML = time;
+    counterE1.textContent = time;
     time--;
 
     if(time < 0) {

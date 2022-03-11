@@ -9,10 +9,26 @@
 </head>
 
 <body>
-    <p id="counter">60</p>
-    <h2>Welcome to the coding quiz! Click the button to get started!</h2>
-    <button id="start">Start!</button>
-
+    <header>
+        <div id="count-box">
+            
+            <p class="label">Time left: </p>
+            <p id="counter" class="counts"></p>
+            <p class="label">Multiplier: </p>
+            <p id="multiplier" class="counts"></p>
+           
+        </div>
+    </header>
+    <div id="display">
+        
+        <h2 id="heading">Welcome to the coding quiz!</h2>
+        <p id="intro">This quiz will contain a series of questions. 
+            The quiz starts when you click the start button below. 
+            Once it starts, you will have 60 seconds to get as many answers correct as possible. 
+            Every question will be worth 1 point. Every consecutive correct answer will increase your multiplier. 
+            Good luck!</p>
+        <button id="start">Start!</button>
+    </div>
     <script src="./assets/js/script.js"></script>
 </body>
 
