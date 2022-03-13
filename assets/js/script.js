@@ -218,6 +218,7 @@ var saveScore = function() {
     }
 
     sortScores(player);
+    localSaveScores();
     showScores();
 }
 
@@ -230,17 +231,14 @@ var sortScores = function(playerObj) {
         for(var i = 0; i < hiscore.length; i++) {
             if(playerObj.score > hiscore[i].score) {
                 hiscore.splice(i, 0, playerObj);
-                console.log(hiscore);
                 return true;
             }
             if(i == hiscore.length - 1) {
                 hiscore.push(playerObj);
-                console.log(hiscore);
                 return true;
             }
         }
     }
-    console.log(hiscore);
 }
 
 var showScores = function() {
@@ -258,7 +256,7 @@ var showScores = function() {
     while(counter < 10 && counter < hiscore.length) {
 
         var newScoreE1 = document.createElement("p");
-        newScoreE1.setAttribute("id", "score-" + hiscore[counter].score);
+        newScoreE1.className = "score-entry";
         newScoreE1.textContent = hiscore[counter].name + " : " + hiscore[counter].score;
         
         hiscoreDisplayE1.appendChild(newScoreE1);
@@ -266,6 +264,25 @@ var showScores = function() {
     }
     quizE1.appendChild(hiscoreDisplayE1);
 }
+
+// Save current array to web storage
+var localSaveScores = function() {
+    localStorage.setItem("scores", JSON.stringify(hiscore));
+}
+
+// Load old data
+var loadScores = function() {
+    hiscore = localStorage.getItem("scores");
+
+    if(!hiscore) {
+        hiscore = [];
+        return false;
+    }
+
+    hiscore = JSON.parse(hiscore);
+}
+
+loadScores();
 
 // listen for button click to start the quiz!
 document.getElementById("start").addEventListener("click", startGame);
