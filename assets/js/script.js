@@ -74,7 +74,7 @@ var startGame = function() {
         // display multiplier and timer
         multiplierE1.textContent = multiplier + "x";
         counterE1.textContent = time;
-        // remove the start button and large welcome header upon starting
+        // remove old HTML elements upon restart
         if(document.querySelector("#start") != null) {
             document.querySelector("#start").remove();
             document.querySelector("#heading").remove();
@@ -84,6 +84,9 @@ var startGame = function() {
         }
         if(document.querySelector("#hiscore-div") != null) {
             document.querySelector("#hiscore-div").remove();
+        }
+        if(document.querySelector("#hiscore-list")) {
+            document.querySelector("#hiscore-list").remove();
         }
         displayButtons();
         displayQuestion();
@@ -136,7 +139,10 @@ var answerQuestion = function(event) {
     // prevents a bug 
     if(tarText == "Start!") {
         
-    } 
+    // prevents a bug that targets our original starting HTML elements   
+    } else if(targetE1 == document.getElementById("quiz") || targetE1 == document.getElementById("intro") || targetE1 == document.getElementById("heading")) {
+        return false;
+    }
      else if(tarText == currentAnswer) {
         score += (1 * multiplier);
         multiplier++;
@@ -178,6 +184,7 @@ var endGame = function() {
     nameInputE1.placeholder = "Enter your name";
     nameInputE1.setAttribute("class", "hiscore");
     nameInputE1.setAttribute("name", "score-name");
+    nameInputE1.setAttribute("id", "score-name-input");
     hiScoreDivE1.appendChild(nameInputE1);
 
     var submitScoreE1 = document.createElement("button");
@@ -209,7 +216,9 @@ var saveScore = function() {
             score: score
         }
     }
+
     sortScores(player);
+    showScores();
 }
 
 // keep the array in ascending order, so that highest scores are stored near 0 index
@@ -235,7 +244,27 @@ var sortScores = function(playerObj) {
 }
 
 var showScores = function() {
+    // Clear Input/Button
+    // Display top 5 Names and scores
+    document.getElementById("score-name-input").remove();
+    document.getElementById("score-btn").remove();
     
+    questionE1.textContent = "High Scores";
+
+    var hiscoreDisplayE1 = document.createElement("div");
+    hiscoreDisplayE1.setAttribute("id", "hiscore-list");
+
+    var counter = 0;
+    while(counter < 10 && counter < hiscore.length) {
+
+        var newScoreE1 = document.createElement("p");
+        newScoreE1.setAttribute("id", "score-" + hiscore[counter].score);
+        newScoreE1.textContent = hiscore[counter].name + " : " + hiscore[counter].score;
+        
+        hiscoreDisplayE1.appendChild(newScoreE1);
+        counter++;
+    }
+    quizE1.appendChild(hiscoreDisplayE1);
 }
 
 // listen for button click to start the quiz!
