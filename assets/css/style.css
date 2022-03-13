@@ -50,3 +50,22 @@ button {
     min-width: 240px;
     height: 50px;
 }
+
+input {
+  border-bottom: solid 1px #2e94b9;
+  padding: 12px;
+  width: 100%;
+  font-size: 2.2rem;
+  border: 2px solid var(--grey);
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+.hiscore {
+    justify-content: center;
+}
+
+#hiscore-div {
+    display: flex;
+    margin: 10px;
+}

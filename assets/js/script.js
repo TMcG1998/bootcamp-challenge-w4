@@ -2,6 +2,8 @@
 const start = 25;
 var time = start;
 
+var hiscore = [];
+
 var score = 0;
 var multiplier = 1;
 var problem = 0;
@@ -79,6 +81,9 @@ var startGame = function() {
         }
         if(document.querySelector("#play-again") != null) {
             document.querySelector("#play-again").remove();
+        }
+        if(document.querySelector("#hiscore-div") != null) {
+            document.querySelector("#hiscore-div").remove();
         }
         displayButtons();
         displayQuestion();
@@ -166,11 +171,71 @@ var endGame = function() {
 
     questionE1.textContent = "Your score was: " + score;
 
+    var hiScoreDivE1 = document.createElement("div");
+    hiScoreDivE1.setAttribute("id", "hiscore-div");
+
+    var nameInputE1 = document.createElement("input");
+    nameInputE1.placeholder = "Enter your name";
+    nameInputE1.setAttribute("class", "hiscore");
+    nameInputE1.setAttribute("name", "score-name");
+    hiScoreDivE1.appendChild(nameInputE1);
+
+    var submitScoreE1 = document.createElement("button");
+    submitScoreE1.textContent = "Submit Score";
+    submitScoreE1.setAttribute("class", "hiscore");
+    submitScoreE1.setAttribute("id", "score-btn");
+    hiScoreDivE1.appendChild(submitScoreE1);
+
+    displayE1.appendChild(hiScoreDivE1);
+
     var againButton = document.createElement("button");
     againButton.textContent = "Play Again!";
     againButton.setAttribute("id", "play-again");
     displayE1.appendChild(againButton);
+
     document.getElementById("play-again").addEventListener("click", startGame);
+    document.getElementById("score-btn").addEventListener("click", saveScore);
+}
+
+// save the score to hiscores
+var saveScore = function() {
+    var inputName = document.querySelector("input[name='score-name']").value;
+    if(!inputName) {
+        alert("You need to enter a name!");
+        return false;
+    } else {
+        var player = {
+            name: inputName,
+            score: score
+        }
+    }
+    sortScores(player);
+}
+
+// keep the array in ascending order, so that highest scores are stored near 0 index
+var sortScores = function(playerObj) {
+    // if this is the first score, just add it
+    if(hiscore.length < 1) {
+        hiscore.push(playerObj);
+    } else {
+        for(var i = 0; i < hiscore.length; i++) {
+            if(playerObj.score > hiscore[i].score) {
+                hiscore.splice(i, 0, playerObj);
+                console.log(hiscore);
+                return true;
+            }
+            if(i == hiscore.length - 1) {
+                hiscore.push(playerObj);
+                console.log(hiscore);
+                return true;
+            }
+        }
+    }
+    console.log(hiscore);
+}
+
+var showScores = function() {
+    
 }
 
 // listen for button click to start the quiz!
