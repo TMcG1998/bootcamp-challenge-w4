@@ -12,7 +12,7 @@ This website is used to quiz someone on general knowledge of coding concepts (Al
 https://tmcg1998.github.io/bootcamp-challenge-w4/
 
 ## Screenshot
-[challenge4](https://user-images.githubusercontent.com/85321444/159189698-ebe10793-585a-48d3-9925-0cb5d4f363de.jpg)
+![challenge4](https://user-images.githubusercontent.com/85321444/159189698-ebe10793-585a-48d3-9925-0cb5d4f363de.jpg)
 
 ## Contributions
-Created and Optimized by Thomas McGovern!
+Created and Optimized by Thomas McGovern
